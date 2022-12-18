@@ -1,9 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from 'axios';
-
-import "./App.css";
-
-import NasaPhoto from './Components/NasaPhoto.js';
+import React from 'react';
 
 const dummyData = {
   date: "2022-12-18",
@@ -12,23 +7,16 @@ const dummyData = {
   title: "25 Brightest Stars in the Night Sky"
 
 }
-function App() {
-  const [data, setData] = useState();
 
-  useEffect(() => {
-  axios.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
-    .then(res=> {
-      setData(res.data);
-    })
-    .catch(err => console.error(err))
-  },  [])
-  return (
-    <div className="App">
-      { data && <NasaPhoto photo={data} />}
-    </div>
-  );
+const NasaPhoto = (props) => {
+    return (
+        <div className= 'nasa-photo-wrapper'>
+            <h3>{props.photo.title}</h3>
+            <p> {props.photo.date}</p>
+            <img src ={props.photo.hdurl}/>
+            <p>{props.photo.explanation}</p>
+        </div>
+    )
 }
 
-export default App;
-
-
+export default NasaPhoto;
